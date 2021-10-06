@@ -1,4 +1,6 @@
-<?php include "parts/header.php"; ?>
+<?php 
+session_start();
+include "parts/header.php"; ?>
 
 <div class="d-flex align-items-center h-100">
 

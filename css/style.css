@@ -1,6 +1,6 @@
 body {
     font-family: 'Open Sans', sans-serif;
-    color: #fff;
+    color: #1d1d1d;
     background: #fff;
     height: 100vh;
     background: #fff;
@@ -65,4 +65,8 @@ input {
     border: none!important;
     border-bottom: 2px solid #1d1d1d!important;
     border-radius: 0!important;
+}
+
+.content{
+    color:#1d1d1d;
 }
