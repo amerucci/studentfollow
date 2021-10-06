@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!$_SESSION["name"]) {
+if(!$_SESSION["name"] || $_SESSION["rule"]!=1) {
   header("Location:../");
   }
 
@@ -13,6 +13,7 @@ if(!$_SESSION["name"]) {
 
 
 <?php echo $_SESSION["name"]; ?>
+<?php echo $_SESSION["rule"]; ?>
     <div class="container">
 </div>
   

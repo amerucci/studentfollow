@@ -12,6 +12,7 @@ class Admin extends Databases{
         echo $login['login'];
         if(is_array($login)){
             $_SESSION["name"] = $login['login'];
+            $_SESSION["rule"] = $login['rule'];
             if($login['rule']==1){
                 $this->redirect('admin', '0');
             }
