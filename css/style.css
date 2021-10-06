@@ -1,0 +1,68 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    background: #fff;
+    height: 100vh;
+    background: #fff;
+    background: -moz-linear-gradient(149deg, rgba(235,234,234,1) 0%, rgba(255,255,255,1) 100%);
+    /* background: -webkit-linear-gradient(149deg, rgba(235,234,234,1) 0%, rgba(255,255,255,1) 100%); */
+    /* background: linear-gradient(149deg, rgba(235,234,234,1) 0%, rgba(255,255,255,1) 100%); */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ebeaea",endColorstr="#ffffff",GradientType=1);
+}
+
+
+
+.form-signin {
+    width: 100%;
+    max-width: 430px;
+    padding: 15px;
+    margin: 0 auto;
+    padding: 60px 68px 40px;
+    background-color: rgba(0,0,0,.75);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    text-align: left;
+    background: rgb(247, 117, 86);
+    background: linear-gradient(
+39deg, rgba(247, 117, 86, 1) 0%, rgba(246, 54, 66, 1) 100%);
+    -webkit-box-shadow: 0px 18px 22px -7px rgb(0 0 0 / 50%);
+    box-shadow: 0px 18px 22px -7px rgb(0 0 0 / 24%);
+    background: #fff;
+    background: -moz-linear-gradient(149deg, rgba(235,234,234,1) 0%, rgba(255,255,255,1) 100%);
+    /* background: -webkit-linear-gradient(149deg, rgba(235,234,234,1) 0%, rgba(255,255,255,1) 100%); */
+    /* background: linear-gradient(333deg, rgba(235,234,234,1) 0%, rgba(255,255,255,1) 100%); */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ebeaea",endColorstr="#ffffff",GradientType=1);
+    color:#1d1d1d;
+    font-weight: 300;
+  }
+
+  .btn-action{
+    background: linear-gradient(
+        315deg, rgba(5, 5, 5, 1) 24%, rgba(54, 54, 54, 1) 102%);
+    color: #fff;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .btn-action:hover{
+color:#fff
+  }
+
+  span.logotextbold {
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+span.logotext {
+    font-weight: 300;
+    font-size: 33px;
+}
+
+input {
+    border: none!important;
+    border-bottom: 2px solid #1d1d1d!important;
+    border-radius: 0!important;
+}

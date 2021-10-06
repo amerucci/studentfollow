@@ -1,8 +1,10 @@
 
 <?php
 
-var_dump($_GET);
-
+//var_dump($_GET);
+require_once(__DIR__.'/controllers/frontController.php');
+require_once(__DIR__.'/controllers/homeController.php');
+require_once(__DIR__.'/controllers/adminController.php');
 
 
 $page='';
@@ -11,15 +13,46 @@ if(isset($_GET['page'])){
 }
 
 if($page==''){
-    require_once(__DIR__.'/controllers/frontController.php');
-    echo all();
+    echo logIn();
 }
 
-else if($page[0]='article'){
-    require_once(__DIR__.'/controllers/frontController.php');
-    echo singlePost();
+else if($page[0]=='admin'){
+    if(!empty($page[1])){
+        echo singlePost();
+    }
+    else{
+        
+        echo adminPanel();
+    }
 }
 
-var_dump($page);
+else if($page[0]=='student'){
+    echo "Vous êtes sur la page d'un apprenant";
+    // if(!empty($page[1])){
+    //     echo singlePost();
+    // }
+    // else{
+        
+    //     echo all();
+    // }
+}
+
+else if($page[0]=='article'){
+    if(!empty($page[1])){
+        echo singlePost();
+    }
+    else{
+        echo all();
+    }
+
+}else if($page='login'){
+   echo logIn();
+  
+  }
+
+
+
+
+//var_dump($page);
 
 ?>

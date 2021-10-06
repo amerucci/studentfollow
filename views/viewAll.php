@@ -29,7 +29,7 @@ ob_start();
           <h3 class="mb-0">  <?= htmlspecialchars($article['title']); ?></h3>
           <div class="mb-1 text-muted"><?= date("d-m-Y", strtotime( $article['date'])); ?></div>
           <p class="card-text mb-auto"><?= htmlspecialchars(substr($article['content'], 0,49))."..."; ?></p>
-          <a href="article/<?= $article['id'] ?>" class="stretched-link">Continue reading</a>
+          <a href="../article/<?= $article['id'] ?>" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block">
           <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
