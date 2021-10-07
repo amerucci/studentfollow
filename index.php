@@ -17,8 +17,8 @@ if($page==''){
 }
 
 else if($page[0]=='admin'){
-    if(!empty($page[1])){
-        echo singlePost();
+    if(!empty($page[1]) && $page[1]=="adduser"){
+        echo addUser();
     }
     else{
         
