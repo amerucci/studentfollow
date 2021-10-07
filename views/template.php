@@ -24,7 +24,7 @@ if (!$_SESSION["name"] || $_SESSION["rule"] != 1) {
     echo $userForm;
   } ?>
   <?php if (!empty($userList)) {
-    echo $userList;
+    echo $userList ;
   } ?>
 
 </div>
