@@ -6,9 +6,9 @@ ob_start();
 
 ?>
 
-<div class="d-flex col-12 col-md-6 m-0 h-100 align-items-center ">
+<div class="d-flex col-12 col-md-6 m-0 h-100 align-items-center">
 
-  <main class="w-100">
+  <main class="form-signin">
     <form method="POST">
 
       <?php if (!empty($adduser)) {
@@ -16,7 +16,7 @@ ob_start();
       }; ?>
 
       <div class="form-floating mb-4">
-        <label for="floatingInput">Identifiant</label>
+        <label for="floatingInput">Identifdddiant</label>
         <input type="text" class="form-control" id="floatingInput" name="login" placeholder="Entrez votre identifiant">
 
       </div>
@@ -48,7 +48,7 @@ ob_start();
 
 <?php
 //$metaDesc = $post['title'].' : '.$post['content'];
-$userForm =  ob_get_clean();
+$userList =  ob_get_clean();
 
 
 ?>

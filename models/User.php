@@ -4,6 +4,8 @@ require_once('connection.php');
 class User extends Databases
 {
 
+    public $error                = "";
+
     public function logIn()
     {
         $login =  $this->connect()->prepare('SELECT * FROM users WHERE login =:nom AND passwd=:mdp ');
@@ -58,20 +60,39 @@ class User extends Databases
     {
 
         $login                  = htmlspecialchars($_POST['login']);
+        $email                  = htmlspecialchars($_POST['email']);
+        
 
-        $verification =  $this->connect()->prepare('SELECT login FROM users WHERE login =:pseudo');
+        $verification =  $this->connect()->prepare('SELECT * FROM users WHERE login =:pseudo OR email =:email'   );
         $verification->bindParam(':pseudo', $login, PDO::PARAM_STR);
+        $verification->bindParam(':email', $email, PDO::PARAM_STR);
         $verification->execute();
         //     $verification->debugDumpParams();
         //    die;
 
 
         $verification = $verification->fetch(PDO::FETCH_ASSOC);
+       // var_dump($verification);
         if (is_array($verification)) {
+            if($login==$verification['login']){
+                  $erreur = '<div class="col-12 alert alert-danger">Ce pseudo est déjà pris</div>';
+                  return $erreur;
+            }
+            if($email==$verification['email']){
+                $erreur = '<div class="col-12 alert alert-danger">Ce mail est déjà pris</div>';
+                return $erreur;
+            }
             //echo "Ce pseudo est déjà pris";
-            echo '<div class="container mt-3"><div class="col-12 alert alert-danger">Ce pseudo est déjà pris</div></div>';
-        } else {
+     
+          
+         }
+        else {
             $this->addUser();
         }
+    }
+
+    function getError(){
+      
+        return $this->error;
     }
 }
