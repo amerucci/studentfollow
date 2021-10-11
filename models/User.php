@@ -10,20 +10,17 @@ class User extends Databases
     {
 
         $passwd                 = htmlspecialchars($_POST['passwd']);
-
-        $passwd                 = "amabvmpm" . sha1($passwd . "h2w8fevn@O") . "7385";
-
-
-
-        $login =  $this->connect()->prepare('SELECT * FROM profil WHERE login =:nom AND passwd=:mdp ');
+        $login =  $this->connect()->prepare('SELECT * FROM profil WHERE login =:nom');
         $login->bindParam(':nom', $_POST['login'], PDO::PARAM_STR);
-        $login->bindParam(':mdp', $passwd, PDO::PARAM_STR);
         $login->execute();
         // $login->debugDumpParams();
-        // die;
+        
         $login = $login->fetch(PDO::FETCH_ASSOC);
-        //echo $login['login'];
-        if (is_array($login)) {
+
+        $verify = password_verify($passwd, $login['passwd']);
+  
+        // Print the result depending if they match
+        if ($verify) {
             $_SESSION["name"] = $login['login'];
             $_SESSION["rule"] = $login['rule_profil'];
             if ($login['rule_profil'] == 1) {
@@ -33,7 +30,25 @@ class User extends Databases
             } else {
                 $this->redirect('/', '0');
             }
+        } else {
+            $this->redirect('/', '0');
         }
+         die;
+
+
+
+        //echo $login['login'];
+        // if (is_array($login)) {
+        //     $_SESSION["name"] = $login['login'];
+        //     $_SESSION["rule"] = $login['rule_profil'];
+        //     if ($login['rule_profil'] == 1) {
+        //         $this->redirect('admin', '0');
+        //     } else if ($login['rule_profil'] == 2) {
+        //         $this->redirect('student', '0');
+        //     } else {
+        //         $this->redirect('/', '0');
+        //     }
+        // }
     }
 
     public function addUser()
@@ -46,7 +61,7 @@ class User extends Databases
 
         //Chiffrage mot de passe
 
-        $passwd = "amabvmpm" . sha1($passwd . "h2w8fevn@O") . "7385";
+        $passwd = password_hash($passwd, PASSWORD_DEFAULT);
         //var_dump($passwd);
 
         $ajouter =  $this->connect()->prepare('INSERT INTO profil (login, passwd, email_profil, rule_profil) VALUES (:login, :passwd, :email, :rule)');
@@ -92,9 +107,6 @@ class User extends Databases
                 $erreur = '<div class="col-12 alert alert-danger">Ce mail est déjà pris</div>';
                 return $erreur;
             }
-            //echo "Ce pseudo est déjà pris";
-
-
         } else {
             $this->addUser();
         }
