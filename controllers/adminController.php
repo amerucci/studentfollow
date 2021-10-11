@@ -27,6 +27,11 @@ function addUser()
         $adduser = new User;
         $adduser = $adduser->ifExist();
     }
+
+        $alluser = new User;
+        $alluser = $alluser->getAllUsers();
+
+
     require(__DIR__ . '/../views/userList.php');
     require(__DIR__ . '/../views/userForm.php');
     require_once(__DIR__ . '/../views/template.php');

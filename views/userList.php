@@ -6,43 +6,67 @@ ob_start();
 
 ?>
 
-<div class="d-flex col-12 col-md-6 m-0 h-100 align-items-center">
-
-  <main class="form-signin">
-    <form method="POST">
-
-      <?php if (!empty($adduser)) {
-        echo $adduser;
-      }; ?>
-
-      <div class="form-floating mb-4">
-        <label for="floatingInput">Identifdddiant</label>
-        <input type="text" class="form-control" id="floatingInput" name="login" placeholder="Entrez votre identifiant">
-
-      </div>
-      <div class="form-floating mb-4">
-        <label for="floatingPassword">Mot de passe</label>
-        <input type="password" class="form-control" id="floatingPassword" name="passwd" placeholder="Entrez votre mot de passe">
-
-      </div>
-
-      <div class="form-floating mb-4">
-        <label for="floatingPassword">mail</label>
-        <input type="email" class="form-control" id="floatingPassword" name="email" placeholder="Entrez votre mot de passe">
-
-      </div>
-
-      <div class="form-floating mb-4">
-        <label for="floatingPassword">rule</label>
-        <input type="text" class="form-control" id="floatingPassword" name="rule" placeholder="Entrez votre mot de passe">
-
-      </div>
+<div class="col-12 col-md-8 m-0 flex-wrap">
 
 
-      <button class="w-100 btn btn-lg btn-action" type="submit">Connexion</button>
 
-    </form>
-  </main>
+
+
+
+  <p>Tapez quelque chose dans le champ de saisie pour rechercher dans le tableau les prénoms, noms de famille ou e-mails : </p>  
+  <input class="form-control" id="myInput" type="text" placeholder="Rechercher...">
+  <br>
+  <div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Pseudo</th>
+        <th>Mot de passe</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>E-mail</th>
+        <th>Actions</th>
+        
+      </tr>
+    </thead>
+    <tbody id="myTable">
+
+    <?php foreach($alluser as $user)
+        {
+            echo "
+            <tr>
+            <td>".$user['login']."</td>
+            <td></td>
+            <td></td>
+            <td>".$user['rule_profil']."</td>
+            <td>".$user['email_profil']."</td>
+            <td> <a href='updateUser.php?id=".$user['id_profil']."'>Modifier</a> <a href='deleteUser.php?id=".$user['id_profil']."'>Supprimer</a></td>
+            
+            </tr>
+            
+            
+            ";
+        }
+        ?>
+    </tbody>
+  </table>
+
+  
+ 
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
 </div>
 
 

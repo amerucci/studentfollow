@@ -38,18 +38,19 @@ class User extends Databases
         //Chiffrage mot de passe
 
         $passwd = "amabvmpm" . sha1($passwd . "h2w8fevn@O") . "7385";
-        var_dump($passwd);
+        //var_dump($passwd);
 
-        $ajouter =  $this->connect()->prepare('INSERT INTO users (login, passwd, email, rule) VALUES (:login, :passwd, :email, :rule)');
+        $ajouter =  $this->connect()->prepare('INSERT INTO profil (login, passwd, email_profil, rule_profil) VALUES (:login, :passwd, :email, :rule)');
         $ajouter->bindParam(':login', $login, PDO::PARAM_STR);
         $ajouter->bindParam(':passwd', $passwd, PDO::PARAM_STR);
         $ajouter->bindParam(':email', $email, PDO::PARAM_STR);
         $ajouter->bindParam(':rule', $rule, PDO::PARAM_STR);
         $estceok = $ajouter->execute();
-       
+
         if ($estceok) {
-            echo '<div class="container mt-3"><div class="col-12 alert alert-success">votre enregistrement a été ajouté avec succés</div></div>';
-            $this->redirect('../admin', '3');
+            $erreur = '<div class="container mt-3"><div class="col-12 alert alert-success">votre enregistrement a été ajouté avec succés</div></div>';
+            return $erreur;
+            //$this->redirect('../admin', '3');
         } else {
             echo '<div class="container mt-3"><div class="col-12 alert alert-danger">Veuillez recommencer svp, une erreur est survenue</div></div>';
             die;
@@ -61,9 +62,9 @@ class User extends Databases
 
         $login                  = htmlspecialchars($_POST['login']);
         $email                  = htmlspecialchars($_POST['email']);
-        
 
-        $verification =  $this->connect()->prepare('SELECT * FROM users WHERE login =:pseudo OR email =:email'   );
+
+        $verification =  $this->connect()->prepare('SELECT * FROM profil WHERE login =:pseudo OR email_profil =:email');
         $verification->bindParam(':pseudo', $login, PDO::PARAM_STR);
         $verification->bindParam(':email', $email, PDO::PARAM_STR);
         $verification->execute();
@@ -72,27 +73,28 @@ class User extends Databases
 
 
         $verification = $verification->fetch(PDO::FETCH_ASSOC);
-       // var_dump($verification);
+        // var_dump($verification);
         if (is_array($verification)) {
-            if($login==$verification['login']){
-                  $erreur = '<div class="col-12 alert alert-danger">Ce pseudo est déjà pris</div>';
-                  return $erreur;
+            if ($login == $verification['login']) {
+                $erreur = '<div class="col-12 alert alert-danger">Ce pseudo est déjà pris</div>';
+                return $erreur;
             }
-            if($email==$verification['email']){
+            if ($email == $verification['email_profil']) {
                 $erreur = '<div class="col-12 alert alert-danger">Ce mail est déjà pris</div>';
                 return $erreur;
             }
             //echo "Ce pseudo est déjà pris";
-     
-          
-         }
-        else {
+
+
+        } else {
             $this->addUser();
         }
     }
 
-    function getError(){
-      
-        return $this->error;
+    public function getAllUsers(){
+        $users = $this->connect()->prepare ('SELECT * From profil ');
+        $users->execute();
+        $users = $users->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
     }
 }

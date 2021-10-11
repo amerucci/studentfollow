@@ -6,7 +6,7 @@ ob_start();
 
 ?>
 
-<div class="d-flex col-12 col-md-6 m-0 h-100 align-items-center ">
+<div class="d-flex col-12 col-md-4 m-0 h-100 align-items-center ">
 
   <main class="w-100">
     <form method="POST">
