@@ -5,7 +5,7 @@
 
 class Databases
 {
-
+    protected $baseurl = "http://studentfollow.local/";
     
     public function connect() //fonction de connextion à la base
     {

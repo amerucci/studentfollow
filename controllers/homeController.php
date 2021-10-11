@@ -10,9 +10,12 @@ require_once(__DIR__.'/../models/User.php');
  */
 function logIn(){
   //echo __DIR__.'/../login.php';
-    require(__DIR__.'/../login.php');
-  $userlogged = new User;
- $userlogged = $userlogged->logIn();
+  require(__DIR__.'/../login.php');
+  if(isset($_POST['login'])&&isset($_POST['passwd'])){
+    $userlogged = new User;
+    $userlogged = $userlogged->logIn();
+  }
+
 
     // $loginForm = new User();
     // $loginForm = $loginForm->thePost();

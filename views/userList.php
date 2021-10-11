@@ -40,7 +40,7 @@ ob_start();
             <td></td>
             <td>".$user['rule_profil']."</td>
             <td>".$user['email_profil']."</td>
-            <td> <a href='updateUser.php?id=".$user['id_profil']."'>Modifier</a> <a href='deleteUser.php?id=".$user['id_profil']."'>Supprimer</a></td>
+            <td> <a href='update/".$user['id_profil']."'>Modifier</a> <a href='delete/".$user['id_profil']."'>Supprimer</a></td>
             
             </tr>
             

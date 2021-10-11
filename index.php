@@ -20,6 +20,20 @@ else if($page[0]=='admin'){
     if(!empty($page[1]) && $page[1]=="users"){
         echo addUser();
     }
+    else if(!empty($page[1]) && $page[1]=="delete"){
+        
+        echo removeUser($page[2]);
+        echo $page[2];
+        die;
+       
+    }
+    else if(!empty($page[1]) && $page[1]=="update"){
+        
+        echo updateUser($page[2]);
+        //echo $page[2];
+        die;
+       
+    }
     else{
         
         echo adminPanel();

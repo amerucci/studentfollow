@@ -8,18 +8,27 @@ class User extends Databases
 
     public function logIn()
     {
-        $login =  $this->connect()->prepare('SELECT * FROM users WHERE login =:nom AND passwd=:mdp ');
+
+        $passwd                 = htmlspecialchars($_POST['passwd']);
+
+        $passwd                 = "amabvmpm" . sha1($passwd . "h2w8fevn@O") . "7385";
+
+
+
+        $login =  $this->connect()->prepare('SELECT * FROM profil WHERE login =:nom AND passwd=:mdp ');
         $login->bindParam(':nom', $_POST['login'], PDO::PARAM_STR);
-        $login->bindParam(':mdp', $_POST['passwd'], PDO::PARAM_STR);
+        $login->bindParam(':mdp', $passwd, PDO::PARAM_STR);
         $login->execute();
+        // $login->debugDumpParams();
+        // die;
         $login = $login->fetch(PDO::FETCH_ASSOC);
-        echo $login['login'];
+        //echo $login['login'];
         if (is_array($login)) {
             $_SESSION["name"] = $login['login'];
-            $_SESSION["rule"] = $login['rule'];
-            if ($login['rule'] == 1) {
+            $_SESSION["rule"] = $login['rule_profil'];
+            if ($login['rule_profil'] == 1) {
                 $this->redirect('admin', '0');
-            } else if ($login['rule'] == 2) {
+            } else if ($login['rule_profil'] == 2) {
                 $this->redirect('student', '0');
             } else {
                 $this->redirect('/', '0');
@@ -91,10 +100,42 @@ class User extends Databases
         }
     }
 
-    public function getAllUsers(){
-        $users = $this->connect()->prepare ('SELECT * From profil ');
+    public function getAllUsers()
+    {
+        $users = $this->connect()->prepare('SELECT * From profil ');
         $users->execute();
         $users = $users->fetchAll(PDO::FETCH_ASSOC);
         return $users;
+    }
+
+    public function getUserInfo($id)
+    {
+        $user = $this->connect()->prepare('SELECT * From profil WHERE id_profil = :id');
+        $user->bindParam(':id', $id, PDO::PARAM_STR);
+        $user->execute();
+        $user = $user->fetch(PDO::FETCH_ASSOC);
+        return $user;
+    }
+
+    public function removeUser($id)
+    {
+        $users = $this->connect()->prepare('DELETE From profil where id_profil=:id');
+        $users->bindParam(':id', $id, PDO::PARAM_STR);
+        $users->execute();
+        // $users->debugDumpParams();
+        // die;
+        $this->redirect('admin/users', '0');
+    }
+
+    public function updateUser($id)
+    {
+        $users = $this->connect()->prepare('UPDATE profil
+        SET login = ?, passwd=?,	firstname_profil=?, name_profil=?, adress_profil=?, zipcode_profil=?, city_profil=?, phone_profil=?, email_profil=?, portfolio_profil=?, github_profil=?, cv_profil=?, promotion_profil=?, avatar_profil=?, skills_profil=?, mobility_profil=?, zone_profil=?, rule_profil=? 
+        WHERE id_profil=?');
+        //$users->bindParam(':id', $id, PDO::PARAM_STR);
+        $users->execute();
+        // $users->debugDumpParams();
+        // die;
+        $this->redirect('admin/users', '0');
     }
 }

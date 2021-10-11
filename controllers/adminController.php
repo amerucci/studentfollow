@@ -37,3 +37,22 @@ function addUser()
     require_once(__DIR__ . '/../views/template.php');
     
 }
+
+function removeUser($id)
+{
+
+        $removeuser = new User;
+        $removeuser = $removeuser->removeUser($id);
+
+}
+
+function updateUser($id)
+{
+
+        $user = new User;
+        $user = $user->getUserInfo($id);
+        var_dump($user);
+        require(__DIR__ . '/../views/profilForm.php');
+        require_once(__DIR__ . '/../views/template.php');
+
+}
