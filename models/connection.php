@@ -11,7 +11,7 @@ class Databases
     {
         try
         {
-            $bdd = new PDO('mysql:host=localhost;dbname=studentfollow;port=3306;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host=localhost;dbname=studentfollow;port=3306;charset=utf8', 'root', 'root');
             return $bdd;
          
         }
